@@ -19,7 +19,7 @@ pipeline {
 				debianPbuilder additionalBuildResults: '', 
 					architecture: '', 
 					components: '', 
-					distribution: 'buster', 
+					distribution: 'bullseye', 
 					keyring: '', 
 					mirrorSite: 'http://deb.debian.org/debian', 
 					pristineTarName: ''
@@ -35,7 +35,7 @@ pipeline {
 				debianPbuilder additionalBuildResults: '', 
 					architecture: 'armhf', 
 					components: '', 
-					distribution: 'buster', 
+					distribution: 'bullseye', 
 					keyring: '', 
 					mirrorSite: 'http://deb.debian.org/debian', 
 					pristineTarName: ''
@@ -53,7 +53,7 @@ pipeline {
 						"files": [{
 						"pattern": "binaries*/*",
 						"target": "test-repo-debian-local/pool/hi-app/",
-						"props":"deb.distribution=buster;deb.component=main;deb.architecture=amd64"
+						"props":"deb.distribution=bullseye;deb.component=main;deb.architecture=amd64"
 						}]
 					}''' )
 
@@ -79,7 +79,7 @@ pipeline {
 						"files": [{
 						"pattern": "binaries*/*",
 						"target": "test-repo-debian-release/pool/hi-app/",
-						"props":"deb.distribution=buster;deb.component=main;deb.architecture=amd64"
+						"props":"deb.distribution=bullseye;deb.component=main;deb.architecture=amd64"
 						}]
 					}''' )
 
