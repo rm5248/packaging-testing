@@ -1,3 +1,5 @@
+def isTag = buildingTag()
+
 pipeline {
 	agent any
 
@@ -23,7 +25,7 @@ pipeline {
 					keyring: '', 
 					mirrorSite: 'http://deb.debian.org/debian', 
 					pristineTarName: '',
-					buildAsTag: buildingTag()
+					buildAsTag: isTag
 
 				fingerprint 'binaries/*.deb'
 			}
