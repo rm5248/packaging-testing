@@ -22,7 +22,8 @@ pipeline {
 					distribution: 'bullseye', 
 					keyring: '', 
 					mirrorSite: 'http://deb.debian.org/debian', 
-					pristineTarName: ''
+					pristineTarName: '',
+					buildAsTag: buildingTag()
 
 				fingerprint 'binaries/*.deb'
 			}
