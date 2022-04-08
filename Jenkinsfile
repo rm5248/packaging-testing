@@ -31,16 +31,7 @@ pipeline {
 		stage('build-armhf'){
 			when { branch 'master' }
 			steps{
-
-				debianPbuilder additionalBuildResults: '', 
-					architecture: 'armhf', 
-					components: '', 
-					distribution: 'bullseye', 
-					keyring: '', 
-					mirrorSite: 'http://deb.debian.org/debian', 
-					pristineTarName: ''
-
-				fingerprint 'binaries/*.deb'
+				echo "would build ARM"
 			}
 		}
 
