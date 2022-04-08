@@ -1,4 +1,4 @@
-def isTag = Boolean.parseBoolean( buildingTag() )
+def isTag = buildingTag().toBoolean()
 
 pipeline {
 	agent any
