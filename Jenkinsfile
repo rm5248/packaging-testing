@@ -8,7 +8,7 @@ void buildDebPkg_fn(String arch, String distro, boolean isTag){
 			pristineTarName: '',
 			buildAsTag: isTag,
 			generateArtifactorySpecFile: true,
-			artifactoryRepoName: buildingTag ? 'test-repo-debian-local' : 'test-repo-debian-release'
+			artifactoryRepoName: isTag ? 'test-repo-debian-local' : 'test-repo-debian-release'
 }
 
 def arch = "amd64"
