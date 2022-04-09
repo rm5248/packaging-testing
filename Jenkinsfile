@@ -8,6 +8,9 @@ void buildDebPkg_fn(String arch, String distro){
 			pristineTarName: ''
 }
 
+var arch = "amd64"
+var distro = "bullseye"
+
 node {
 		stage('Clean'){
 				cleanWs()
