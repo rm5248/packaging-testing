@@ -20,7 +20,7 @@ node {
 					env.GIT_COMMIT = scmVars.GIT_COMMIT
 				}
 
-				printenv
+				sh 'printenv'
 		}
 
 		stage("Build-${arch}-${distro}"){
