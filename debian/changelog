@@ -1,3 +1,9 @@
+testpkg (1.1) unstable; urgency=medium
+
+  * foobar baz thingies
+
+ -- Robert Middleton <robert.middleton@rm5248.com>  Fri, 08 Apr 2022 20:28:22 -0400
+
 testpkg (1.0) unstable; urgency=medium
 
   * Initial Release.
