@@ -1,11 +1,12 @@
-void buildDebPkg_fn(String arch, String distro){
+void buildDebPkg_fn(String arch, String distro, boolean isTag){
 	debianPbuilder additionalBuildResults: '', 
 			architecture: arch, 
 			components: '', 
 			distribution: distro, 
 			keyring: '', 
 			mirrorSite: 'http://deb.debian.org/debian', 
-			pristineTarName: ''
+			pristineTarName: '',
+			buildAsTag: isTag
 }
 
 def arch = "amd64"
@@ -28,12 +29,13 @@ node {
 		}
 
 		stage("Build-${arch}-${distro}"){
+			def buildingTag = env.TAG_NAME != null
 			if( repoHook.length() > 0 ){
 				configFileProvider([configFile(fileId: "${repoHook}", targetLocation: 'hookdir/D21-repo-hook')]){
-					buildDebPkg_fn( arch, distro )
+					buildDebPkg_fn( arch, distro, buildingTag )
 				}
 			}else{
-				buildDebPkg_fn( arch, distro )
+				buildDebPkg_fn( arch, distro, buildingTag )
 			}
 		} //stage
 
@@ -63,7 +65,7 @@ node {
 		}
 
 		stage('upload-release'){
-			if( env.BRANCH_NAME == "tags"){
+			if( env.TAG_NAME != null ){
 				rtUpload (
 					serverId: 'rm5248-jfrog',
 					spec: '''{
