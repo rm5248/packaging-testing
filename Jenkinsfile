@@ -6,12 +6,15 @@ void buildDebPkg_fn(String arch, String distro, boolean isTag){
 			keyring: '', 
 			mirrorSite: 'http://deb.debian.org/debian', 
 			pristineTarName: '',
-			buildAsTag: isTag
+			buildAsTag: isTag,
+			generateArtifactorySpecFile: true,
+			artifactoryRepoName: buildingTag ? 'test-repo-debian-local' : 'test-repo-debian-release'
 }
 
 def arch = "amd64"
 def distro = "bullseye"
 def repoHook = ""
+def buildingTag = env.TAG_NAME != null
 
 node {
 		stage('Clean'){
@@ -29,7 +32,6 @@ node {
 		}
 
 		stage("Build-${arch}-${distro}"){
-			def buildingTag = env.TAG_NAME != null
 			if( repoHook.length() > 0 ){
 				configFileProvider([configFile(fileId: "${repoHook}", targetLocation: 'hookdir/D21-repo-hook')]){
 					buildDebPkg_fn( arch, distro, buildingTag )
@@ -43,13 +45,8 @@ node {
 			if( env.BRANCH_NAME == 'master' ){
 				rtUpload (
 					serverId: 'rm5248-jfrog',
-					spec: '''{
-						"files": [{
-						"pattern": "binaries*/*",
-						"target": "test-repo-debian-local/pool/hi-app/",
-						"props":"deb.distribution=bullseye;deb.component=main;deb.architecture=amd64"
-						}]
-					}''' )
+					specPath: 'artifactory-spec-debian-pbuilder/debian-pbuilder.spec'
+				)
 
 				rtBuildInfo (
 					// Optional - Maximum builds to keep in Artifactory.
@@ -68,13 +65,8 @@ node {
 			if( env.TAG_NAME != null ){
 				rtUpload (
 					serverId: 'rm5248-jfrog',
-					spec: '''{
-						"files": [{
-						"pattern": "binaries*/*",
-						"target": "test-repo-debian-release/pool/hi-app/",
-						"props":"deb.distribution=bullseye;deb.component=main;deb.architecture=amd64"
-						}]
-					}''' )
+					specPath: 'artifactory-spec-debian-pbuilder/debian-pbuilder.spec'
+				)
 
 				rtBuildInfo (
 				)
