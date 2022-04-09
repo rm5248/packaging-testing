@@ -8,8 +8,9 @@ void buildDebPkg_fn(String arch, String distro){
 			pristineTarName: ''
 }
 
-var arch = "amd64"
-var distro = "bullseye"
+def arch = "amd64"
+def distro = "bullseye"
+def repoHook = ""
 
 node {
 		stage('Clean'){
