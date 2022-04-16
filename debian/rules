@@ -3,6 +3,8 @@
 # output every command that modifies files on the build system.
 #export DH_VERBOSE = 1
 
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/default.mk
 
 # see FEATURE AREAS in dpkg-buildflags(1)
 #export DEB_BUILD_MAINT_OPTIONS = hardening=+all
